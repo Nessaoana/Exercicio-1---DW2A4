@@ -1,7 +1,10 @@
     var assunto_span = document.getElementsByClassName("assunto");
 	var tempo = document.getElementsByClassName("tempo");
 	var li = document.getElementsByTagName("li");
-	
+	var remetente = document.getElementsByClassName("nome");
+
+	var novaLista = "<ul>";
+
 function ordenar(){
 
 	// Pegando os textos de assunto
@@ -29,15 +32,25 @@ function ordenar(){
 			if(diferentes_assunto[i] == so_texto[j]){
 				aux.push(j);
 			}
-			ulNovo.innerHTML(li[aux[j]]);
+			//li[j].getElementsByClassName("remetente").textContent;
 		} 
+		
 		//ordeno o vetor com assuntos iguais pela data/hora
 		aux = ordenaData(aux);
-		
-		
+		console.log("vou add na lista");
+		novaLista+= "<li><p><span>" + so_texto[aux[0]] + "</span></p>"
+		for(var c = 0; c<aux.length;c+=1){
+			novaLista+= "<p><span>" + remetente[aux[c]].textContent + "</span>";
+			novaLista+= "<span>" + tempo[aux[c]].textContent + "</span> </p>";
+			//novaLista+= "<span>" + li[aux[i]].getElementsByClassName("tempo").textContent + "</span></p></li>"; 
+		}
+
 		
 		//console.log(aux);
 	}
+	
+	novaLista+= "</ul>";
+	document.getElementById("novo").innerHTML = novaLista;
 
 }
 
@@ -82,6 +95,7 @@ function ordenaData(x){
 	// console.log(tempo);
 	// console.log(so_datas);
 	console.log(x);
+	console.log("antes de ordenar");
 	//utiliando booble short
     for(var i=0;i<x.length;i+=1){
         for(var j=x.length-1;j>i;j-=1){
@@ -94,8 +108,10 @@ function ordenaData(x){
             }
         }
     }
-	
 	console.log(x);
+	console.log("depois de ordenar por data");
+	return x;
+	
 }
 
 
