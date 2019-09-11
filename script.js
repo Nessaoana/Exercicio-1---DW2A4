@@ -10,6 +10,9 @@ function ordenar() {
 	var so_texto = [];
 	var diferentes_assunto;
 	var aux;
+	var i;
+	var j;
+	var c;
 
 	if (orde == 0) {
 		// Pegando os textos de assunto
@@ -23,11 +26,11 @@ function ordenar() {
 		//var tamanho_li = li.length;
 
 		// for pra pegar a posição do so_texto
-		
-		for (var i = 0; i < diferentes_assunto.length; i++) {
+
+		for (i = 0; i < diferentes_assunto.length; i++) {
 			aux = [];
 			// for para pegar o li 
-			for (var j = 0; j < so_texto.length; j++) {
+			for (j = 0; j < so_texto.length; j++) {
 				//console.log();
 				if (diferentes_assunto[i] == so_texto[j]) {
 					aux.push(j);
@@ -39,7 +42,7 @@ function ordenar() {
 			aux = ordenaData(aux);
 			console.log("vou add na lista");
 			novaLista += "<li class='list-group-item'><h4><span>" + so_texto[aux[0]] + "</span></h4>"
-			for (var c = 0; c < aux.length; c += 1) {
+			for (c = 0; c < aux.length; c += 1) {
 				novaLista += "<p><span>" + remetente[aux[c]].textContent + "</span>";
 				novaLista += "<span>" + tempo[aux[c]].textContent + "</span> </p>";
 				//novaLista+= "<span>" + li[aux[i]].getElementsByClassName("tempo").textContent + "</span></p></li>"; 
@@ -57,6 +60,8 @@ function ordenar() {
 
 function ordenarData() {
 	var aux = [];
+	var i;
+	var c;
 	if (dataorde == 0) {
 		novaLista = "";
 
@@ -66,13 +71,13 @@ function ordenarData() {
 		so_texto = pegaTexto(assunto_span);
 
 		// for pra pegar a posição do so_texto
-		for (var i = 0; i < so_texto.length; i++) {
+		for (i = 0; i < so_texto.length; i++) {
 			aux.push(i);
 		}
 		//console.log(aux);
 		aux = ordenaData(aux);
 
-		for (var c = 0; c < aux.length; c += 1) {
+		for (c = 0; c < aux.length; c += 1) {
 			novaLista += "<li class='list-group-item'><h4><span>" + so_texto[aux[c]] + "</span></h4>"
 			novaLista += "<p><span>" + remetente[aux[c]].textContent + "</span>";
 			novaLista += "<span>" + tempo[aux[c]].textContent + "</span> </p>";
@@ -89,7 +94,7 @@ function ordenarData() {
 
 function pegaTexto(x) {
 	var tamanho = x.length;
-
+	var i;
 	//console.log(tamanho);
 	var assunto_text = [];
 	for (var i = 0; i < tamanho; i++) {
@@ -101,13 +106,14 @@ function pegaTexto(x) {
 }
 
 function retornaDif(x) {
-
+	var i;
+	var j;
 	var tamanho = x.length;
 	var diferentes = [];
 	var isIgual = false;
 
-	for (var i = 0; i < tamanho; i++) {
-		for (var j = 0; j < diferentes.length; j++) {
+	for (i = 0; i < tamanho; i++) {
+		for (j = 0; j < diferentes.length; j++) {
 			if (x[i] == diferentes[j]) {
 				isIgual = true;
 			}
@@ -129,10 +135,12 @@ function ordenaData(x) {
 	// console.log(so_datas);
 	//console.log(x);
 	//console.log("antes de ordenar");
+	var i;
+	var j;
 
 	var isMenor;
-	for (var i = 0; i < x.length; i += 1) {
-		for (var j = x.length - 1; j > i; j -= 1) {
+	for (i = 0; i < x.length; i += 1) {
+		for (j = x.length - 1; j > i; j -= 1) {
 			//pergunta para se o assunto atual de i corresponde ao assunto atual de j
 			isMenor = pegaData(so_datas[x[i]], so_datas[x[j]]);
 			if (!isMenor) {
