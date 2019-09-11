@@ -14,7 +14,7 @@ function ordenar() {
 	var j;
 	var c;
 
-	if (orde == 0) {
+	if (orde === 0) {
 		// Pegando os textos de assunto
 		so_texto = pegaTexto(assunto_span);
 
@@ -27,12 +27,12 @@ function ordenar() {
 
 		// for pra pegar a posição do so_texto
 
-		for (i = 0; i < diferentes_assunto.length; i++) {
+		for (i = 0; i < diferentes_assunto.length; i += 1) {
 			aux = [];
 			// for para pegar o li 
-			for (j = 0; j < so_texto.length; j++) {
+			for (j = 0; j < so_texto.length; j += 1) {
 				//console.log();
-				if (diferentes_assunto[i] == so_texto[j]) {
+				if (diferentes_assunto[i] === so_texto[j]) {
 					aux.push(j);
 				}
 				//li[j].getElementsByClassName("remetente").textContent;
@@ -41,11 +41,10 @@ function ordenar() {
 			//ordeno o vetor com assuntos iguais pela data/hora
 			aux = ordenaData(aux);
 			console.log("vou add na lista");
-			novaLista += "<li class='list-group-item'><h4><span>" + so_texto[aux[0]] + "</span></h4>"
+			novaLista += "<li class='list-group-item'><h4><span>" + so_texto[aux[0]] + "</span></h4>";
 			for (c = 0; c < aux.length; c += 1) {
 				novaLista += "<p><span>" + remetente[aux[c]].textContent + "</span>";
 				novaLista += "<span>" + tempo[aux[c]].textContent + "</span> </p>";
-				//novaLista+= "<span>" + li[aux[i]].getElementsByClassName("tempo").textContent + "</span></p></li>"; 
 			}
 			//console.log(aux);
 		}
@@ -62,7 +61,7 @@ function ordenarData() {
 	var aux = [];
 	var i;
 	var c;
-	if (dataorde == 0) {
+	if (dataorde === 0) {
 		novaLista = "";
 
 		novaLista += "<ul class='list-group'>";
@@ -71,17 +70,16 @@ function ordenarData() {
 		so_texto = pegaTexto(assunto_span);
 
 		// for pra pegar a posição do so_texto
-		for (i = 0; i < so_texto.length; i++) {
+		for (i = 0; i < so_texto.length; i += 1) {
 			aux.push(i);
 		}
 		//console.log(aux);
 		aux = ordenaData(aux);
 
 		for (c = 0; c < aux.length; c += 1) {
-			novaLista += "<li class='list-group-item'><h4><span>" + so_texto[aux[c]] + "</span></h4>"
+			novaLista += "<li class='list-group-item'><h4><span>" + so_texto[aux[c]] + "</span></h4>";
 			novaLista += "<p><span>" + remetente[aux[c]].textContent + "</span>";
 			novaLista += "<span>" + tempo[aux[c]].textContent + "</span> </p>";
-			//novaLista+= "<span>" + li[aux[i]].getElementsByClassName("tempo").textContent + "</span></p></li>"; 
 		}
 
 		novaLista += "</ul>";
@@ -97,7 +95,7 @@ function pegaTexto(x) {
 	var i;
 	//console.log(tamanho);
 	var assunto_text = [];
-	for (var i = 0; i < tamanho; i++) {
+	for ( i = 0; i < tamanho; i += 1) {
 		assunto_text[i] = x[i].textContent;
 	}
 
@@ -112,9 +110,9 @@ function retornaDif(x) {
 	var diferentes = [];
 	var isIgual = false;
 
-	for (i = 0; i < tamanho; i++) {
-		for (j = 0; j < diferentes.length; j++) {
-			if (x[i] == diferentes[j]) {
+	for (i = 0; i < tamanho; i += 1) {
+		for (j = 0; j < diferentes.length; j += 1) {
+			if (x[i] === diferentes[j]) {
 				isIgual = true;
 			}
 		}
@@ -137,14 +135,15 @@ function ordenaData(x) {
 	//console.log("antes de ordenar");
 	var i;
 	var j;
-
 	var isMenor;
+	var pote;
+
 	for (i = 0; i < x.length; i += 1) {
 		for (j = x.length - 1; j > i; j -= 1) {
 			//pergunta para se o assunto atual de i corresponde ao assunto atual de j
 			isMenor = pegaData(so_datas[x[i]], so_datas[x[j]]);
 			if (!isMenor) {
-				var pote = x[i];
+				pote = x[i];
 				x[i] = x[j];
 				x[j] = pote;
 			}
