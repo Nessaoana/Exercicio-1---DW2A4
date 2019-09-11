@@ -2,76 +2,89 @@ var assunto_span = document.getElementsByClassName("assunto");
 var tempo = document.getElementsByClassName("tempo");
 var li = document.getElementsByTagName("li");
 var remetente = document.getElementsByClassName("nome");
-var novaLista = "<ul>";
+var novaLista = "<ul class='list-group'>";
+var orde = 0;
+var dataorde = 0;
 
 function ordenar() {
-
-	// Pegando os textos de assunto
-	var so_texto = [];
-	so_texto = pegaTexto(assunto_span);
+	if (orde == 0) {
 
 
-	// Excluindo os textos repetidos
-	var diferentes_assunto;
-	diferentes_assunto = retornaDif(so_texto);
+		// Pegando os textos de assunto
+		var so_texto = [];
+		so_texto = pegaTexto(assunto_span);
 
-	//console.log(so_texto);
 
-	//var tamanho_li = li.length;
+		// Excluindo os textos repetidos
+		var diferentes_assunto;
+		diferentes_assunto = retornaDif(so_texto);
 
-	// for pra pegar a posição do so_texto
-	for (var i = 0; i < diferentes_assunto.length; i++) {
-		var aux = [];
-		// for para pegar o li 
-		for (var j = 0; j < so_texto.length; j++) {
-			//console.log();
-			if (diferentes_assunto[i] == so_texto[j]) {
-				aux.push(j);
+		//console.log(so_texto);
+
+		//var tamanho_li = li.length;
+
+		// for pra pegar a posição do so_texto
+		for (var i = 0; i < diferentes_assunto.length; i++) {
+			var aux = [];
+			// for para pegar o li 
+			for (var j = 0; j < so_texto.length; j++) {
+				//console.log();
+				if (diferentes_assunto[i] == so_texto[j]) {
+					aux.push(j);
+				}
+				//li[j].getElementsByClassName("remetente").textContent;
 			}
-			//li[j].getElementsByClassName("remetente").textContent;
+
+			//ordeno o vetor com assuntos iguais pela data/hora
+			aux = ordenaData(aux);
+			console.log("vou add na lista");
+			novaLista += "<li class='list-group-item'><h4><span>" + so_texto[aux[0]] + "</span></h4>"
+			for (var c = 0; c < aux.length; c += 1) {
+				novaLista += "<p><span>" + remetente[aux[c]].textContent + "</span>";
+				novaLista += "<span>" + tempo[aux[c]].textContent + "</span> </p>";
+				//novaLista+= "<span>" + li[aux[i]].getElementsByClassName("tempo").textContent + "</span></p></li>"; 
+			}
+			//console.log(aux);
 		}
 
-		//ordeno o vetor com assuntos iguais pela data/hora
+		novaLista += "</ul>";
+		document.getElementById("novo").innerHTML = novaLista;
+		orde = 1;
+	} else {
+		alert("Lista já ordenada");
+	}
+}
+
+function ordenarData() {
+	if (dataorde == 0) {
+		novaLista = "";
+
+		novaLista += "<ul class='list-group'>";
+		// Pegando os textos de assunto
+		var so_texto = [];
+		so_texto = pegaTexto(assunto_span);
+
+		var aux = [];
+		// for pra pegar a posição do so_texto
+		for (var i = 0; i < so_texto.length; i++) {
+			aux.push(i);
+		}
+		//console.log(aux);
 		aux = ordenaData(aux);
-		console.log("vou add na lista");
-		novaLista += "<li><h3><span>" + so_texto[aux[0]] + "</span></h3>"
+
 		for (var c = 0; c < aux.length; c += 1) {
+			novaLista += "<li class='list-group-item'><h4><span>" + so_texto[aux[c]] + "</span></h4>"
 			novaLista += "<p><span>" + remetente[aux[c]].textContent + "</span>";
 			novaLista += "<span>" + tempo[aux[c]].textContent + "</span> </p>";
 			//novaLista+= "<span>" + li[aux[i]].getElementsByClassName("tempo").textContent + "</span></p></li>"; 
 		}
-		//console.log(aux);
+
+		novaLista += "</ul>";
+		document.getElementById("ordata").innerHTML = novaLista;
+		dataorde = 1;
+	} else {
+		alert("Lista já ordenada por data");
 	}
-
-	novaLista += "</ul>";
-	document.getElementById("novo").innerHTML = novaLista;
-}
-
-function ordenarData() {
-	novaLista = "";
-
-	novaLista += "<ul>";
-	// Pegando os textos de assunto
-	var so_texto = [];
-	so_texto = pegaTexto(assunto_span);
-
-	var aux = [];
-	// for pra pegar a posição do so_texto
-	for (var i = 0; i < so_texto.length; i++) {
-		aux.push(i);
-	}
-	//console.log(aux);
-	aux = ordenaData(aux);
-
-	for (var c = 0; c < aux.length; c += 1) {
-		novaLista += "<li><h3><span>" + so_texto[aux[c]] + "</span></h3>"
-		novaLista += "<p><span>" + remetente[aux[c]].textContent + "</span>";
-		novaLista += "<span>" + tempo[aux[c]].textContent + "</span> </p>";
-		//novaLista+= "<span>" + li[aux[i]].getElementsByClassName("tempo").textContent + "</span></p></li>"; 
-	}
-
-	novaLista += "</ul>";
-	document.getElementById("ordata").innerHTML = novaLista;
 }
 
 function pegaTexto(x) {
