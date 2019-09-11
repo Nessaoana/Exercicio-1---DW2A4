@@ -5,8 +5,11 @@
   <title></title>
 </head>
 <body>
-        <script type="text/javascript" src="script.js"> </script>
-	<button value="ordenar" onclick="ordenar()">ordenar</button>
+	<script type="text/javascript" src="script.js"> </script>
+	
+	<button value="ordenar" onclick="ordenar()">Ordenar por assunto</button>
+	<button value="ordenarHora" onclick="ordenarData()">Ordenar por data</button>
+
 	<ul>
 		<li>
 			<p><span class="nome">Marcelo</span><span class="tempo">12:45</span></p>
@@ -50,7 +53,10 @@
 		</li>
     </ul>
 
-	<h2> Lista ordenada </h2>
+	<h2> Lista ordenada por Assunto </h2>
 	<div id="novo"> </div>
+
+	<h2> Lista ordenada por data</h2>
+	<div id="ordata"> </div>
 	
 </body>
