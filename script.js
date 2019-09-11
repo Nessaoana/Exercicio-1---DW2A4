@@ -7,16 +7,15 @@ var orde = 0;
 var dataorde = 0;
 
 function ordenar() {
+	var so_texto = [];
+	var diferentes_assunto;
+	var aux;
+
 	if (orde == 0) {
-
-
 		// Pegando os textos de assunto
-		var so_texto = [];
 		so_texto = pegaTexto(assunto_span);
 
-
 		// Excluindo os textos repetidos
-		var diferentes_assunto;
 		diferentes_assunto = retornaDif(so_texto);
 
 		//console.log(so_texto);
@@ -24,8 +23,9 @@ function ordenar() {
 		//var tamanho_li = li.length;
 
 		// for pra pegar a posição do so_texto
+		
 		for (var i = 0; i < diferentes_assunto.length; i++) {
-			var aux = [];
+			aux = [];
 			// for para pegar o li 
 			for (var j = 0; j < so_texto.length; j++) {
 				//console.log();
@@ -56,6 +56,7 @@ function ordenar() {
 }
 
 function ordenarData() {
+	var aux = [];
 	if (dataorde == 0) {
 		novaLista = "";
 
@@ -64,7 +65,6 @@ function ordenarData() {
 		var so_texto = [];
 		so_texto = pegaTexto(assunto_span);
 
-		var aux = [];
 		// for pra pegar a posição do so_texto
 		for (var i = 0; i < so_texto.length; i++) {
 			aux.push(i);
@@ -129,11 +129,12 @@ function ordenaData(x) {
 	// console.log(so_datas);
 	//console.log(x);
 	//console.log("antes de ordenar");
-	//utiliando booble short
+
+	var isMenor;
 	for (var i = 0; i < x.length; i += 1) {
 		for (var j = x.length - 1; j > i; j -= 1) {
 			//pergunta para se o assunto atual de i corresponde ao assunto atual de j
-			var isMenor = pegaData(so_datas[x[i]], so_datas[x[j]]);
+			isMenor = pegaData(so_datas[x[i]], so_datas[x[j]]);
 			if (!isMenor) {
 				var pote = x[i];
 				x[i] = x[j];
