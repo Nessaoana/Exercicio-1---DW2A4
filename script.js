@@ -1,6 +1,5 @@
 var assunto_span = document.getElementsByClassName("assunto");
 var tempo = document.getElementsByClassName("tempo");
-var li = document.getElementsByTagName("li");
 var remetente = document.getElementsByClassName("nome");
 var novaLista = "<ul class='list-group'>";
 var orde = 0;
